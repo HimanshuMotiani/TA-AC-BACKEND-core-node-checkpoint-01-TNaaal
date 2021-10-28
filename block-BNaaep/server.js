@@ -62,12 +62,13 @@ function handleRequest(req, res) {
             let fileNames = fs.readdirSync(__dirname + "/contacts")
             fileNames.forEach((fileName, i, arr) => {
                 fs.readFile((contactDir + fileName), (err, content) => {
-                    let stringData = qs.parse(content.toString());
+                    let stringData = JSON.parse(content.toString());
                     console.log(stringData);
                     let username = stringData.username;
                     console.log(username);
                     res.write(`<a href="/users?username=${username}">${username}</a></br>`)
-                    if(arr.length === i) res.end();
+                    if(arr.length === i) 
+                    res.end();
                 })
             })
         }
